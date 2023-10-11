@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: space-between;
+  border-bottom: 2px solid red;
+}
+
+.fsmtitle {
+  font-size: 2em;
+  font-weight: 800;
+}

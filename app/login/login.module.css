@@ -1,0 +1,11 @@
+.errorMessage {
+  border: 1px solid pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffaaaa;
+  margin-top: 20px;
+  border-radius: 4px;
+  height: 40px;
+  border-color: #ff0000;
+}
