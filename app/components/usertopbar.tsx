@@ -4,6 +4,7 @@ import styles from "./usertopbar.module.css";
 import axios from "axios";
 import { useState, useEffect } from 'react'; 
 import Logout from "./logout";
+import Link from 'next/link';
 
 interface User {
   id: Number,
@@ -17,6 +18,7 @@ export default function UserTopbar() {
   const [count, setCount] = useState<any>(0);
   const [userInfo, setUserInfo] = useState<User>();
 
+
   useEffect(() => {
     if(typeof window !== 'undefined')
     {
@@ -26,9 +28,16 @@ export default function UserTopbar() {
 
   const [userData, setUserData] = useState();
 
+  const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
+
+  const onLogout = () => {
+    localStorage.removeItem('authToken');
+  }
+
   const loadData = () => {
     if(count > 0) return;
 
+    // Gambiarra
     setCount(1);
     var config = {
       url: process.env.NEXT_PUBLIC_API_USER + "/user",
@@ -46,6 +55,10 @@ export default function UserTopbar() {
       .catch((err) => {});
   };
 
+  const onProfileImageClick = () => {
+    setIsProfileVisible(!isProfileVisible);
+  }
+
   loadData();
 
   return (
@@ -57,9 +70,36 @@ export default function UserTopbar() {
       </div>
 
       {/* Profile Area */}
-      <div>
-        <div className={styles.profileContainer}></div>
+      <div className={styles.profileContainer} onClick={() => {onProfileImageClick()}}>
+        <div className="mr-5">Hello, stranger!</div>
+        <div>
+          <div style={{width: '40px', height: '40px', background: 'white', borderRadius: '50%'}} ></div>
+        </div>
       </div>
+
+      {/* Modal Area (Profile Image Pop-up) */}
+      { isProfileVisible &&
+      <div className={styles.modalContainer}>
+        <div className={styles.modalContent}>
+          <div>
+            <div className={styles.modalImageContainer}>
+            </div>
+          </div>
+          <div>
+            <ul>
+              <li>Home</li>
+              <li>Profile</li>
+              <li><Link href='/admin'>Admin</Link></li>
+              <li>Settings</li>
+            </ul>
+            <div className={styles.modalSectionDelimiter}></div>
+            <ul>
+              <li onClick={() => {onLogout()}}><Link href='/' >Logout</Link></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      }
     </div>
   );
 }
