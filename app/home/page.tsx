@@ -1,10 +1,10 @@
 import styles from "./page.module.css";
-import Sidebar from "../components/sidebar";
+import UserTopbar from "../components/usertopbar";
 
 export default function Home() {
   return (
     <div className="block">
-      <Sidebar />
+      <UserTopbar />
       <div className={styles.container}>
         <span>Conteúdo aqui</span>
       </div>

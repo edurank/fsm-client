@@ -5,8 +5,6 @@ import axios from "axios";
 import Toast from "../components/toast";
 import styles from "./login.module.css";
 
-import InfoCard from "../components/infocard";
-
 function Login() {
   const [toast, setToast] = useState<any>(null);
   const [invalidAccount, setInvalidAccount] = useState<any>(null);
@@ -30,23 +28,25 @@ function Login() {
     setInvalidAccount(null);
 
     var config = {
-      url: process.env.NEXT_PUBLIC_API_USER + "/User/login",
+      url: process.env.NEXT_PUBLIC_API_USER + "/login",
       method: "post",
       data: userData,
     };
 
+
+
+      console.log("login", config);
     axios(config)
       .then((res: any) => {
-        // to-do
-        // set local storage - bearer token
-        // success message
         localStorage.setItem("authToken", res.data);
       })
       .catch((err: any) => {
+        /*
         if (err.response.status == 401) {
           setInvalidAccount(true);
           setToast({ message: "Invalid email or password.", success: false });
         }
+        */
       });
   };
 
