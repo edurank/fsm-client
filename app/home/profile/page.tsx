@@ -8,22 +8,22 @@ import { FaEdit } from 'react-icons/fa';
 
 interface Profile {
   id: Number;
-  first_name: String;
-  last_name: String;
+  firstName: String;
+  lastName: String;
   email: String;
   password?: String;
-  date_of_birth: String;
+  dateOfBirth: String;
   gender: String;
-  phone_number: String;
+  phoneNumber: String;
   bio: String;
-  profile_picture_url: String;
-  cover_image_url: String;
-  video_1_url: String;
-  video_2_url: String;
-  video_3_url: String;
-  registration_date: String;
-  last_login_date: String;
-  is_verified: String;
+  profilePictureUrl: String;
+  coverImageUrl: String;
+  video1Url: String;
+  video2Url: String;
+  video3Url: String;
+  registrationDate: String;
+  lastLoginDate: String;
+  isVerified: String;
   role: String;
 }
 
