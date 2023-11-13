@@ -7,9 +7,11 @@ import ProfileCard from "../components/profileCard";
 import Posts from '../components/posts';
 import axios from 'axios';
 
+
 export default function Home() {
   const [posts, setPosts] = useState<any>(null);
-  const [ownPosts, setOwnPosts] = useState<any>()
+  const [ownPosts, setOwnPosts] = useState<any>();
+  const [news, setNews] = useState<any>();
   const [option, setOption] = useState<Number>(0);
   const [authToken, setAuthToken] = useState<String>("");
   const [ownPostsLoaded, isOwnPostsLoaded] = useState<boolean>(false);
@@ -54,12 +56,30 @@ export default function Home() {
       });
   };
 
+  /* test only */
+  const getNews = () => {
 
+    var config = {
+      url: process.env.NEXT_PUBLIC_APIURL + "/echo/news",
+      method: "GET"
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(response.data);
+        setNews(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const handleChangeOption = (option: Number) => {
     setOption(option);
     if(option == 1) {
       getOwnPosts();
+    }else {
+      getNews();
     }
   }
 
@@ -77,7 +97,11 @@ export default function Home() {
             {option == 1 ?
               <Posts data={ownPosts != null && ownPosts} />
               :
-              <Posts data={posts && posts} />
+              <div>
+                {news && news.articles.map((new) => (
+
+                ))}
+              </div>
             }
           </div>
         </div>
