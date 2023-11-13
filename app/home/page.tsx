@@ -4,22 +4,26 @@ import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import UserTopbar from "../components/usertopbar";
 import ProfileCard from "../components/profileCard";
-import Posts from '../components/posts';
-import axios from 'axios';
+import Posts from "../components/posts";
+import axios from "axios";
 
+interface News {
+  status: string;
+  totalResult: number;
+  articles: any;
+}
 
 export default function Home() {
   const [posts, setPosts] = useState<any>(null);
   const [ownPosts, setOwnPosts] = useState<any>();
-  const [news, setNews] = useState<any>();
+  const [news, setNews] = useState<News>();
   const [option, setOption] = useState<Number>(0);
   const [authToken, setAuthToken] = useState<String>("");
   const [ownPostsLoaded, isOwnPostsLoaded] = useState<boolean>(false);
 
   const selectedOption = {
-    borderBottom: '5px solid lightblue'
+    borderBottom: "5px solid lightblue",
   };
-    
 
   useEffect(() => {
     getAuthToken();
@@ -27,13 +31,12 @@ export default function Home() {
 
   const getAuthToken = () => {
     try {
-      const storedValue = localStorage.getItem('authToken');
+      const storedValue = localStorage.getItem("authToken");
       if (storedValue) {
         setAuthToken(storedValue);
-
       }
     } catch (error) {
-      console.error('Error retrieving value from local storage:', error);
+      console.error("Error retrieving value from local storage:", error);
     }
   };
 
@@ -58,10 +61,9 @@ export default function Home() {
 
   /* test only */
   const getNews = () => {
-
     var config = {
       url: process.env.NEXT_PUBLIC_APIURL + "/echo/news",
-      method: "GET"
+      method: "GET",
     };
 
     axios(config)
@@ -72,16 +74,16 @@ export default function Home() {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   const handleChangeOption = (option: Number) => {
     setOption(option);
-    if(option == 1) {
+    if (option == 1) {
       getOwnPosts();
-    }else {
+    } else {
       getNews();
     }
-  }
+  };
 
   return (
     <div className="block">
@@ -90,19 +92,29 @@ export default function Home() {
         <ProfileCard />
         <div className={styles.contentContainer}>
           <div className={styles.contentHeader}>
-            <div style={option == 0 ? selectedOption : {}} onClick={() => {handleChangeOption(0)}}>Explore</div>
-            <div style={option == 1 ? selectedOption : {}} onClick={() => {handleChangeOption(1)}}>Your Posts</div>
+            <div
+              style={option == 0 ? selectedOption : {}}
+              onClick={() => {
+                handleChangeOption(0);
+              }}
+            >
+              Explore
+            </div>
+            <div
+              style={option == 1 ? selectedOption : {}}
+              onClick={() => {
+                handleChangeOption(1);
+              }}
+            >
+              Your Posts
+            </div>
           </div>
           <div className={styles.contentBody}>
-            {option == 1 ?
+            {option == 1 ? (
               <Posts data={ownPosts != null && ownPosts} />
-              :
-              <div>
-                {news && news.articles.map((new) => (
-
-                ))}
-              </div>
-            }
+            ) : (
+              <div>{news && <div>{news?.articles}</div>}</div>
+            )}
           </div>
         </div>
       </div>

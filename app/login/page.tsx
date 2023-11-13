@@ -4,19 +4,18 @@ import { useState } from "react";
 import axios from "axios";
 import Toast from "../components/toast";
 import styles from "./login.module.css";
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 function Login() {
   const [toast, setToast] = useState<any>(null);
-  const [invalidAccount, setInvalidAccount] = useState<any>(null); 
+  const [invalidAccount, setInvalidAccount] = useState<any>(null);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
 
   const router = useRouter();
-
 
   const onInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -32,7 +31,7 @@ function Login() {
     setInvalidAccount(null);
 
     var config = {
-      url: process.env.NEXT_PUBLIC_API_USER + "/login",
+      url: process.env.NEXT_PUBLIC_APIURL + "/login",
       method: "post",
       data: userData,
     };
@@ -40,7 +39,7 @@ function Login() {
     axios(config)
       .then((res: any) => {
         localStorage.setItem("authToken", res.data);
-        router.push('/home');
+        router.push("/home");
       })
       .catch((err: any) => {
         /*

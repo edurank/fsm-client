@@ -2,15 +2,15 @@
 
 import styles from "./usertopbar.module.css";
 import axios from "axios";
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect } from "react";
 import Logout from "./logout";
-import Link from 'next/link';
+import Link from "next/link";
 
 interface User {
-  id: Number,
-  name: String,
-  email: String,
-  avatarUrl: String
+  id: Number;
+  name: String;
+  email: String;
+  avatarUrl: String;
 }
 
 export default function UserTopbar() {
@@ -18,11 +18,9 @@ export default function UserTopbar() {
   const [count, setCount] = useState<any>(0);
   const [userInfo, setUserInfo] = useState<User>();
 
-
   useEffect(() => {
-    if(typeof window !== 'undefined')
-    {
-      setTkn(localStorage.getItem('authToken') || "" );
+    if (typeof window !== "undefined") {
+      setTkn(localStorage.getItem("authToken") || "");
     }
   }, []);
 
@@ -31,16 +29,16 @@ export default function UserTopbar() {
   const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
 
   const onLogout = () => {
-    localStorage.removeItem('authToken');
-  }
+    localStorage.removeItem("authToken");
+  };
 
   const loadData = () => {
-    if(count > 0) return;
+    if (count > 0) return;
 
     // Gambiarra
     setCount(1);
     var config = {
-      url: process.env.NEXT_PUBLIC_API_USER + "/user",
+      url: process.env.NEXT_PUBLIC_APIURL + "/user",
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +55,7 @@ export default function UserTopbar() {
 
   const onProfileImageClick = () => {
     setIsProfileVisible(!isProfileVisible);
-  }
+  };
 
   loadData();
 
@@ -70,35 +68,46 @@ export default function UserTopbar() {
       </div>
 
       {/* Profile Area */}
-      <div className={styles.profileContainer} onClick={() => {onProfileImageClick()}}>
+      <div
+        className={styles.profileContainer}
+        onClick={() => {
+          onProfileImageClick();
+        }}
+      >
         <div className="mr-5">Hello, stranger!</div>
-        <div className={styles.imageContainer}>
-        </div>
+        <div className={styles.imageContainer}></div>
       </div>
 
       {/* Modal Area (Profile Image Pop-up) */}
-      { isProfileVisible &&
-      <div className={styles.modalContainer}>
-        <div className={styles.modalContent}>
-          <div>
-            <div className={styles.modalImageContainer}>
+      {isProfileVisible && (
+        <div className={styles.modalContainer}>
+          <div className={styles.modalContent}>
+            <div>
+              <div className={styles.modalImageContainer}></div>
+            </div>
+            <div>
+              <ul>
+                <li>Home</li>
+                <li>Profile</li>
+                <li>
+                  <Link href="/admin">Admin</Link>
+                </li>
+                <li>Settings</li>
+              </ul>
+              <div className={styles.modalSectionDelimiter}></div>
+              <ul>
+                <li
+                  onClick={() => {
+                    onLogout();
+                  }}
+                >
+                  <Link href="/">Logout</Link>
+                </li>
+              </ul>
             </div>
           </div>
-          <div>
-            <ul>
-              <li>Home</li>
-              <li>Profile</li>
-              <li><Link href='/admin'>Admin</Link></li>
-              <li>Settings</li>
-            </ul>
-            <div className={styles.modalSectionDelimiter}></div>
-            <ul>
-              <li onClick={() => {onLogout()}}><Link href='/' >Logout</Link></li>
-            </ul>
-          </div>
         </div>
-      </div>
-      }
+      )}
     </div>
   );
 }
