@@ -18,3 +18,7 @@ export interface Profile {
   isVerified: String;
   role: String;
 }
+
+export interface Post {
+  
+}

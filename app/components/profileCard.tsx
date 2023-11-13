@@ -47,7 +47,6 @@ function ProfileCard() {
 
     axios(config)
       .then((response) => {
-        console.log(response.data);
         setProfile(response.data);
         setLoaded(true);
       })

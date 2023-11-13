@@ -4,12 +4,10 @@ import styles from "./post.module.css";
 
 /*
   List<Post>
-
-  
 */
 
 export default function Post() {
-  const [posts, setPosts] = useState<any>();
+  const [post, setPost] = useState<any>();
   const [token, setToken] = useState<any>();
 
   const getPosts = () => {

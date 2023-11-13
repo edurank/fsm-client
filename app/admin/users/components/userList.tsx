@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-type User = {
-  id: Number;
-  name: String;
-  email: String;
-  password: String;
-  dateOfBirth: String;
-  role: Number;
-};
+import { Profile } from '../../../utils/interfaces';
+import { FaEdit, FaRegTrashAlt, FaEye } from 'react-icons/fa';
 
 export default function UserList() {
   const [users, setUsers] = useState<any>(null);
@@ -38,7 +31,7 @@ export default function UserList() {
     
     setCount(1);
     var config = {
-      url: process.env.NEXT_PUBLIC_API_USER + "/user/all",
+      url: process.env.NEXT_PUBLIC_APIURL + "/user/all",
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +48,7 @@ export default function UserList() {
       });
   };
 
-  const deleteUserHandler = (user: User) => {
+  const deleteUserHandler = (user: Profile) => {
     var postData = {
       Id: user.id,
     };
@@ -124,6 +117,8 @@ export default function UserList() {
           <thead>
             <tr>
               <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              </th>
+              <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Name
               </th>
               <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -140,10 +135,15 @@ export default function UserList() {
           <tbody className="bg-white divide-y divide-gray-200 text-black">
             {users != null && Object.keys(users).length > 0 ? (
               <>
-                {users.map((user: User, index: any) => (
+                {users.map((user: Profile, index: any) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-no-wrap">
-                      {user.name}
+                      <div style={{width: '50px', height: '50px', borderRadius: '50%', overflow: 'hidden'}}>
+                        <img className="object-cover w-full h-full" src={user.profilePictureUrl} /> 
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap">
+                      {user.firstName + " " + user.lastName}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       {user.email}
@@ -153,7 +153,7 @@ export default function UserList() {
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                        Edit
+                        <FaEdit size={20} color="white" />
                       </button>
                       <button
                         onClick={() => {
@@ -161,10 +161,10 @@ export default function UserList() {
                         }}
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                       >
-                        Delete
+                        <FaRegTrashAlt size={20} color="white" />
                       </button>
                       <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                        View
+                        <FaEye size={20} color="white" />
                       </button>
                     </td>
                   </tr>
