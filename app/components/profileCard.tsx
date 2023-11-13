@@ -55,8 +55,6 @@ function ProfileCard() {
       });
   }
 
-  console.log(profile.profilePictureUrl);
-
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>

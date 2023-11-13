@@ -72,8 +72,7 @@ export default function UserTopbar() {
       {/* Profile Area */}
       <div className={styles.profileContainer} onClick={() => {onProfileImageClick()}}>
         <div className="mr-5">Hello, stranger!</div>
-        <div>
-          <div style={{width: '40px', height: '40px', background: 'white', borderRadius: '50%'}} ></div>
+        <div className={styles.imageContainer}>
         </div>
       </div>
 

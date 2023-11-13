@@ -20,5 +20,15 @@ export interface Profile {
 }
 
 export interface Post {
-  
+  id: Number;
+  authorId: Number;
+  content: String;
+  likes: Number;
+  comments: Number;
+  createdAt: String;
+  updatedAt: String;
+  isPublshed: String;
+  imageUrl: String;
+  externalUrl: String;
+  location: String;
 }
