@@ -5,6 +5,7 @@ import axios from "axios";
 import styles from './profile.module.css';
 import UserTopbar from "@/app/components/usertopbar";
 import { FaEdit } from 'react-icons/fa';
+import ProfileCard from '../../components/profileCard';
 
 interface Profile {
   id: Number;
@@ -129,13 +130,7 @@ export default function Profile() {
     <div className={styles.background}>
       <UserTopbar />
       <div className={styles.container}>
-        <div className={styles.headerContainer}>
-          <div className={styles.header}>
-            <div className={styles.imageContainer}>
-
-            </div>
-          </div>
-        </div>
+        <ProfileCard />
         <div className={styles.contentContainer}>
           <div className={styles.content}>
             <InputField
