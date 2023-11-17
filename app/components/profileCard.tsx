@@ -57,9 +57,13 @@ function ProfileCard() {
       });
   }
 
+  const settingsHandler = () => {
+    setShowSettings(false);
+  }
+
   return (
     <div className={styles.container}>
-      <Settings isEnabled={showSettings} />
+      {showSettings && <Settings onClose={settingsHandler} />}
       <div className="flex justify-end" style={{backgroundColor: '#881c34'}}>
         <div style={{backgroundColor: 'white', marginRight: '20px', marginTop: '20px', borderRadius: '50%', cursor: 'pointer', width: '40px', height: '40px', display: 'flex', justifyContent: 'center', alignItems: 'center'}} onClick={() => {setShowSettings(true)}}>
           <IoMdSettings size={30} />

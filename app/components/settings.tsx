@@ -8,19 +8,21 @@ import { IoCloseSharp } from "react-icons/io5";
 
 /* FIX SETTINGS SHOW */
 
-function Settings({isEnabled}: {isEnabled: boolean;}) {
-  const [showx, setShow] = useState<boolean>();
-
-  useEffect(() => {
-    setShow(isEnabled);
-  }, []);
+function Settings({onClose}: {onClose: () => void}) {
 
   return (
-    <div style={{display: showx ? "block": "none"}} className={styles.container}>
-      <div onClick={() => {setShow(false)}} className={styles.headerContainer}>
-        <IoCloseSharp />
+    <div className={styles.container}>
+      <div className={styles.modalContainer}>
+        <div onClick={onClose} className={styles.headerContainer}>
+          <div>
+            <span>Settings</span>
+          </div>
+          <div className="cursor-pointer">
+            <IoCloseSharp size={25} />
+          </div>
+        </div>
+        <div className={styles.contentContainer}></div>
       </div>
-      <div className={styles.contentContainer}></div>
     </div>
   )
 }
