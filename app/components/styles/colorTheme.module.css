@@ -1,0 +1,27 @@
+.container {
+  width: 80px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 25%;
+  border-top-right-radius: 25%;
+  border-bottom-left-radius: 25%;
+  /*border: 1px solid #0000005f;
+  */
+  box-shadow: .1px .1px 7px -5px #000;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.colorContainer {
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+}
+
+.footerContainer {
+  width: 100%;
+  padding: 0px 0px 3px 13px;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './styles/settings.module.css';
 import { IoCloseSharp } from "react-icons/io5";
+import ColorTheme from './colorTheme';
 /* 
   ; Theme Switcher
   ; Linked Accounts - YT / Twitter(X) / GitHub links / Linked In
@@ -21,7 +22,15 @@ function Settings({onClose}: {onClose: () => void}) {
             <IoCloseSharp size={25} />
           </div>
         </div>
-        <div className={styles.contentContainer}></div>
+        <div className={styles.contentContainer}>
+          <section>
+            <h1>Color Theme</h1>
+            <div>
+              <ColorTheme name="blue" color="#98bad5" selected={false} />
+              <ColorTheme name="red" color="#ff3333" selected={true} />
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   )

@@ -27,5 +27,22 @@
 
 .headerContainer span {
   font-weight: 800;
-  font-size: 28px;
+  font-size: 32px;
+}
+
+.contentContainer {
+  padding: 20px;
+}
+
+.contentContainer section h1 {
+  font-size: 24px;
+}
+
+.contentContainer section>div {
+  padding: 20px;
+  display: flex;
+}
+
+.contentContainer section>div>div {
+  margin-right: 10px;
 }
