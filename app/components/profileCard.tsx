@@ -58,6 +58,9 @@ function ProfileCard() {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
+        <div>
+          Configuration
+        </div>
         <div className={styles.imageContainer}>
           <img className="object-cover w-full h-full" src={loaded ? profile.profilePictureUrl : ""} />
         </div>
