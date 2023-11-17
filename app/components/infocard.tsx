@@ -1,4 +1,4 @@
-import styles from './infocard.module.css';
+import styles from './styles/infocard.module.css';
 
 /* card severity:  warning, error, success */
 

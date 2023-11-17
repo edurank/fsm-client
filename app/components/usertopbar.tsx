@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./usertopbar.module.css";
+import styles from "./styles/usertopbar.module.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Logout from "./logout";

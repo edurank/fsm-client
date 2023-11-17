@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Profile } from '../utils/interfaces';
-import styles from './profileCard.module.css';
+import styles from './styles/profileCard.module.css';
 import { colors } from '../utils/colors';
+import Settings from './settings';
+import { IoMdSettings } from "react-icons/io";
 
 function ProfileCard() {
   const [token, setToken] = useState<String>("");
-
+  const [showSettings, setShowSettings] = useState<boolean>(false);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile>({
     id: 0,
@@ -57,10 +59,13 @@ function ProfileCard() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.headerContainer}>
-        <div>
-          Configuration
+      <Settings isEnabled={showSettings} />
+      <div className="flex justify-end" style={{backgroundColor: '#881c34'}}>
+        <div style={{backgroundColor: 'white', marginRight: '20px', marginTop: '20px', borderRadius: '50%', cursor: 'pointer', width: '40px', height: '40px', display: 'flex', justifyContent: 'center', alignItems: 'center'}} onClick={() => {setShowSettings(true)}}>
+          <IoMdSettings size={30} />
         </div>
+      </div>
+      <div className={styles.headerContainer}>
         <div className={styles.imageContainer}>
           <img className="object-cover w-full h-full" src={loaded ? profile.profilePictureUrl : ""} />
         </div>

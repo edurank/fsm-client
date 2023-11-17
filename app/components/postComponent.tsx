@@ -1,4 +1,4 @@
-import styles from "./postComponent.module.css";
+import styles from "./styles/postComponent.module.css";
 import { Post } from '../utils/interfaces';
 
 function PostComponent({data}: {data: Post}) {
