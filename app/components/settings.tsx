@@ -26,10 +26,11 @@ function Settings({onClose}: {onClose: () => void}) {
           <section>
             <h1>Color Theme</h1>
             <div>
-              <ColorTheme name="blue" color="#98bad5" selected={false} />
+              <ColorTheme name="blue" color="#98bad5" selected={true} />
               <ColorTheme name="red" color="#ff3333" selected={true} />
             </div>
           </section>
+          <div className={styles.separator}></div>
         </div>
       </div>
     </div>
