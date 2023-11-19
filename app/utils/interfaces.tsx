@@ -20,7 +20,7 @@ export interface Profile {
 }
 
 export interface Post {
-  id: Number;
+  id?: Number;
   authorId: Number;
   content: String;
   likes: Number;
@@ -31,4 +31,8 @@ export interface Post {
   imageUrl: String;
   externalUrl: String;
   location: String;
+}
+
+export interface NewPost {
+  content: String;
 }

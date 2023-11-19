@@ -6,6 +6,7 @@ import UserTopbar from "../components/usertopbar";
 import ProfileCard from "../components/profileCard";
 import Posts from "../components/posts";
 import axios from "axios";
+import NewPost from "../components/newPost";
 
 interface News {
   status: string;
@@ -91,6 +92,9 @@ export default function Home() {
       <div className={styles.container}>
         <ProfileCard />
         <div className={styles.contentContainer}>
+          <div>
+            <NewPost />
+          </div>
           <div className={styles.contentHeader}>
             <div
               style={option == 0 ? selectedOption : {}}
