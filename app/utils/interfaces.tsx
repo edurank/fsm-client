@@ -35,4 +35,5 @@ export interface Post {
 
 export interface NewPost {
   content: String;
+  image: String;
 }

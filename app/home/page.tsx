@@ -7,6 +7,7 @@ import ProfileCard from "../components/profileCard";
 import Posts from "../components/posts";
 import axios from "axios";
 import NewPost from "../components/newPost";
+import LoadingIcon from "../components/loadingIcon";
 
 interface News {
   status: string;
@@ -20,7 +21,7 @@ export default function Home() {
   const [news, setNews] = useState<News>();
   const [option, setOption] = useState<Number>(0);
   const [authToken, setAuthToken] = useState<String>("");
-  const [ownPostsLoaded, isOwnPostsLoaded] = useState<boolean>(false);
+  const [ownPostsLoaded, setOwnPostsLoaded] = useState<boolean>(false);
 
   const selectedOption = {
     borderBottom: "5px solid lightblue",
@@ -43,7 +44,7 @@ export default function Home() {
 
   const getOwnPosts = () => {
     var config = {
-      url: process.env.NEXT_PUBLIC_APIURL + "/post/all",
+      url: process.env.NEXT_PUBLIC_APIURL + "/post",
       method: "GET",
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -53,7 +54,9 @@ export default function Home() {
 
     axios(config)
       .then((response) => {
+        setOwnPostsLoaded(true);
         setOwnPosts(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -92,7 +95,7 @@ export default function Home() {
       <div className={styles.container}>
         <ProfileCard />
         <div className={styles.contentContainer}>
-          <div>
+          <div className="flex justify-end mb-5">
             <NewPost />
           </div>
           <div className={styles.contentHeader}>
@@ -114,9 +117,14 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.contentBody}>
-            {option == 1 ? (
+            {option == 1 ? 
+              ownPostsLoaded ? 
               <Posts data={ownPosts != null && ownPosts} />
-            ) : (
+              :
+              <div className="flex align-center justify-center">
+                <LoadingIcon /> 
+              </div>
+             : (
               <div>{news && <div>{news?.articles}</div>}</div>
             )}
           </div>

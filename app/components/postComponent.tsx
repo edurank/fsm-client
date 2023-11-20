@@ -1,23 +1,37 @@
 import styles from "./styles/postComponent.module.css";
 import { Post } from '../utils/interfaces';
+import { FcLike } from "react-icons/fc";
 
 function PostComponent({data}: {data: Post}) {
   return (
     <div className={styles.container}>
-      {/* Title */}
-      <div>{data.content}</div>
+      {/* Header */}
+      <div className="border">
+        <div>
+          User Data
+        </div>
+        <div>
 
-      {/* Subtitle */}
-      <div></div>
-
-      {/* Date */}
-      <div>{data.comments.toString()}</div>
+        </div>
+      </div>
 
       {/* Content */}
-      <div>{data.likes.toString()}</div>
+      <div>
+        <span>This is the Body</span>
+          {data.content}
+      </div>
 
-      {/* Upvotes / Share / Save */}
-      <div></div>
+
+      <div className="flex justify-end align-items-center">
+        {/* Date */}
+        <div>{data.comments.toString()}</div>
+
+        {/* Content */}
+        <div className="flex">{data.likes.toString()}<FcLike /></div>
+
+        {/* Upvotes / Share / Save */}
+        <div></div>
+      </div>
     </div>
   );
 }
