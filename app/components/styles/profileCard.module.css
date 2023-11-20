@@ -1,7 +1,7 @@
 .container {
   width: 500px;
   background-color: white;
-  height: 600px;
+  height: fit-content;
   display: flex;
   color: black;
   justify-content: space-between;

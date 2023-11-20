@@ -10,20 +10,21 @@ import Toast from './toast';
 
 // Button WIth "+ New Post" that calls the new post component
 function NewPost () {
-
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const handleButtonClick = () => {
-    setIsVisible(false);
+  const handleClose = () => {
+    setIsVisible(!isVisible);
   }
 
   return (
-    <div className={styles.postButton}>
-      {isVisible && <NewPostComponent onClose={handleButtonClick} />}
-      <GrAddCircle color="lightblue" size={25} />
-      <div>
-        <span>New Post</span>
+    <div>
+      <div onClick={handleClose} className={styles.postButton}>
+        <GrAddCircle color="lightblue" size={25} />
+        <div>
+          <span>New Post</span>
+        </div>
       </div>
+      {isVisible && <NewPostComponent onClose={handleClose} />}
     </div>
   )
 }
@@ -67,13 +68,24 @@ function NewPostComponent({onClose} : {onClose: () => void}) {
     <div className={styles.componentContainer}>
       <div className={styles.componentContainerContent}>
         <div className={styles.componentHeader}>
-          <div></div>
-          <div className="cursor-pointer">
+          <div>Create a new post...</div>
+          <div onClick={onClose} className="cursor-pointer" style={{border: "1px solid black"}}>
             <IoCloseSharp size={25} />
           </div>
         </div>
         <div className={styles.componentBody}>
-
+          <div className="w-full max-w-md mx-auto p-4">
+          <textarea
+            className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            rows={4}
+            placeholder="Type something..."
+          ></textarea>
+        </div>
+        </div>
+        <div className="flex justify-end align-items-center">
+          <div className={styles.componentSubmitButton}>
+            <span>Submit</span>
+          </div>
         </div>
       </div>
     </div>
